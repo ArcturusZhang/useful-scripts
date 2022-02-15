@@ -11,11 +11,19 @@ param (
 $root = Join-Path $dotnetSDKPath "sdk"
 Get-ChildItem $root -Recurse -Attributes Directory -Depth 2 | ForEach-Object {
     if ($_.Name -match "^Azure.ResourceManager") {
-        Write-Host "regenerating $_"
+        if ($_.Name -match "^Azure.ResourceManager.Insights") {
+            Write-Host "skipping $_"
+            continue
+        }
+        # checking if the src/autorest.md exists
         $path = Join-Path $_ "src"
-        Push-Location $path
-        autorest --use=$autorestArtifactPath autorest.md
-        Pop-Location  
+        $autorestMdFilepath = Join-Path $path "autorest.md"
+        if (Test-Path -Path $autorestMdFilepath) {
+            Write-Host "regenerating $_"
+            Push-Location $path
+            autorest --use=$autorestArtifactPath autorest.md
+            Pop-Location  
+        }
     }
 }
 
