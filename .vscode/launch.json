@@ -8,15 +8,9 @@
       "name": "PowerShell Launch Script",
       "type": "PowerShell",
       "request": "launch",
-      "script": "enter path or command to execute e.g.: ${workspaceFolder}/src/foo.ps1 or Invoke-Pester",
+      "script": "${workspaceFolder}/remove-go-mod-tidy-hack.ps1",
+      "args": ["."],
       "cwd": "${workspaceFolder}"
-    },
-    {
-      "name": "PowerShell: Launch Current File",
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${file} C:\\Users\\dapzhang\\Documents\\workspace\\autorest.csharp\\artifacts\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1 C:\\Users\\dapzhang\\Documents\\workspace\\azure-sdk-for-net",
-      "cwd": "${file}"
     }
   ]
 }
